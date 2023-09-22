@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+  "cartesi-jsonrpc-interfaces",
+  "jsonrpc-cartesi-machine"
+]

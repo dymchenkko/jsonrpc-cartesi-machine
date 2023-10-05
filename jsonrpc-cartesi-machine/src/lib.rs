@@ -667,11 +667,11 @@ impl JsonRpcCartesiMachineClient {
     /// Create new client instance. Connect to the server as part of client instantiation
     pub async fn new<'a>(server_address: String) -> Result<Self, jsonrpsee::core::error::Error> {
 
-        let transport = jsonrpsee::http_client::HttpClientBuilder::default()
+        let transport = jsonrpsee::http_client::HttpClientBuilder::default().request_timeout(core::time::Duration::MAX)
             .build(&server_address)
             .unwrap();
 
-        let mut remote_machine = std::sync::Arc::new(async_mutex::Mutex::new(
+        let remote_machine = std::sync::Arc::new(async_mutex::Mutex::new(
             RemoteCartesiMachine::new(transport),
         ));
         match remote_machine
